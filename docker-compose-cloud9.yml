@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  cloud9:
+    image: sapk/cloud9
+    volumes:
+      - "C:/Users/jintahibari/Documents/DOCKER:/workspace"
+    ports:
+      - "11000:8181"
+    command: --auth username:password
+      
