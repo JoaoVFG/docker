@@ -10,4 +10,17 @@ services:
         ports:
             - "3000"
             - "22" 
-      
+    
+    db:
+        image: postgres
+        restart: always
+        environment:
+            POSTGRES_PASSWORD: postgres
+        volumes:
+            - basedados:/var/lib/postgresql/data
+        ports:
+            - "5432"
+#Necessario criar o volume de maneira externa : docker volume create basedados
+volumes:
+  basedados:
+    external: true
