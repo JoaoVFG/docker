@@ -1,26 +1,37 @@
 version: '3'
 
-services:
-    rails:
-        build : 
-            context: ./Dockerfiles
-        image: joaovfg/rubycontainer:1.1
+services: #tag dos serviços
+    rails: #nome do serviço
+        build: #sinaliza que deve ser criado com base em um docker file
+            #local do docker file
+            context: ./Dockerfiles 
+        depends_on: #usado para indicar dependencia de serviços
+            - db 
+        #imagem original
+        image: joaovfg/rubycontainer:1.1 
+        #volumes 
         volumes:
             - "C:/Users/jintahibari/Documents/DOCKER:/projects"
+        #portas, simbolizam as portas do conatainer
         ports:
             - "3000"
             - "22" 
     
     db:
+        #nome da imagem
         image: postgres
+        #opção para reinicialização automatica se erro
         restart: always
+        # tag para infos de ambiente
         environment:
             POSTGRES_PASSWORD: postgres
+        #volumes, nesse caso usando o volume marcado
         volumes:
             - basedados:/var/lib/postgresql/data
         ports:
             - "5432"
 #Necessario criar o volume de maneira externa : docker volume create basedados
 volumes:
+  #nome  do volume
   basedados:
     external: true
