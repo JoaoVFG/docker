@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+    db:
+        #nome da imagem
+        image: postgres
+        #opção para reinicialização automatica se erro
+        restart: always
+        # tag para infos de ambiente
+        environment:
+            POSTGRES_PASSWORD: postgres
+        #volumes, nesse caso usando o volume marcado
+        volumes:
+            - basedados:/var/lib/postgresql/data
+        ports:
+            - "5432"
+    web:
+        build: .
+        command: bundle exec rails s -p 3000 -b '0.0.0.0'
+        volumes:
+            - .:/myapp
+        ports:
+            - "3000"
+        depends_on:
+            - db
+#Necessario criar o volume de maneira externa : docker volume create basedados
+volumes:
+  #nome  do volume
+  basedados:
+    external: true

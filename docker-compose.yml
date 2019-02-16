@@ -11,7 +11,7 @@ services: #tag dos serviços
         image: joaovfg/rubycontainer:1.1 
         #volumes 
         volumes:
-            - "C:/Users/jintahibari/Documents/DOCKER:/projects"
+            - "C:/DEVPROGRAMS/DOCKER_VOLUME:/projects"
         #portas, simbolizam as portas do conatainer
         ports:
             - "3000"
